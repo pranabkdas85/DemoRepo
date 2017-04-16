@@ -10,6 +10,7 @@ public class Collections_API {
 		list.add("A");   //0
 		list.add("B");   //1
 		list.add("C");   //2
+		list.add("D");   //3
 		System.out.println(list.size());
 		System.out.println(list.get(2));
 		System.out.println(list.indexOf("B"));
