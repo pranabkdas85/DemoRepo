@@ -11,6 +11,7 @@ public class Collections_API {
 		list.add("B");   //1
 		list.add("C");   //2
 		list.add("D");   //3
+		list.add("E");   //4
 		System.out.println(list.size());
 		System.out.println(list.get(2));
 		System.out.println(list.indexOf("B"));
