@@ -1,0 +1,6 @@
+Hello we are writing the file
+Second line in the file
+Third line in the file
+Forth line in the file
+Fifth line in the file
+Sixth line in the file
