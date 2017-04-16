@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="My Sample Suite" duration-ms="2070" started-at="2017-04-08T12:48:07Z" finished-at="2017-04-08T12:48:09Z">
+    <groups>
+    </groups>
+    <test name="TestB" duration-ms="2064" started-at="2017-04-08T12:48:07Z" finished-at="2017-04-08T12:48:09Z">
+      <class name="testcases.TestB">
+        <test-method status="PASS" signature="testB()[pri:0, instance:testcases.TestB@51efea79]" name="testB" duration-ms="2020" started-at="2017-04-08T18:18:07Z" finished-at="2017-04-08T18:18:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testB -->
+      </class> <!-- testcases.TestB -->
+    </test> <!-- TestB -->
+    <test name="TestA" duration-ms="2064" started-at="2017-04-08T12:48:07Z" finished-at="2017-04-08T12:48:09Z">
+      <class name="testcases.TestA">
+        <test-method status="PASS" signature="testA()[pri:0, instance:testcases.TestA@458ad742]" name="testA" duration-ms="2020" started-at="2017-04-08T18:18:07Z" finished-at="2017-04-08T18:18:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testA -->
+      </class> <!-- testcases.TestA -->
+    </test> <!-- TestA -->
+    <test name="TestC" duration-ms="2070" started-at="2017-04-08T12:48:07Z" finished-at="2017-04-08T12:48:09Z">
+      <class name="testcases.TestC">
+        <test-method status="PASS" signature="testC()[pri:0, instance:testcases.TestC@58651fd0]" name="testC" duration-ms="2020" started-at="2017-04-08T18:18:07Z" finished-at="2017-04-08T18:18:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testC -->
+      </class> <!-- testcases.TestC -->
+    </test> <!-- TestC -->
+  </suite> <!-- My Sample Suite -->
+</testng-results>
