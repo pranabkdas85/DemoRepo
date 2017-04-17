@@ -3,9 +3,17 @@ package practice;
 public class Random_number {
 
 	public static void main(String[] args) {
-	int i=10;
-			double d= Math.random()*10 ;
-	System.out.println((int)d);
+	
+		int n = 4;
+		//This will always give a n-digit number
+		int max=1;
+		for(int i=0;i<n;i++)
+			max*=10;
+		
+		double d= Math.random()*max +max/10 ;
+		d = d<max?d:d-max/10;
+		
+		System.out.println((int)d);
 
 	}
 
