@@ -12,7 +12,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class Q4 {
 
 	public static void main(String[] args) throws InterruptedException {
-		System.setProperty("webdriver.greco.driver","C:\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver","C:\\geckodriver.exe");
 
 		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 		FirefoxOptions options = new FirefoxOptions();
