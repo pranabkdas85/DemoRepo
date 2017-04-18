@@ -1,6 +1,6 @@
 package practice;
 
-public class Random_number {
+public class Random4DigitNumber {
 
 	public static void main(String[] args) {
 	
