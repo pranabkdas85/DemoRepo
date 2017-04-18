@@ -30,10 +30,10 @@ public class Q2 {
 				.sendKeys("Agartala");
 		driver.findElement(By.id("checkin")).click();
 		driver.findElement(
-				By.xpath("html/body/div[2]/div[1]/table/tbody/tr[5]/td[5]"))
+				By.xpath("html/body/div[2]/div[1]/table/tbody/tr[5]/td[7]"))
 				.click();
 		driver.findElement(
-				By.xpath("html/body/div[3]/div[1]/table/tbody/tr[5]/td[6]"))
+				By.xpath("html/body/div[3]/div[1]/table/tbody/tr[6]/td[1]"))
 				.click();
 		WebElement room = driver.findElement(By.id("rooms"));
 		List<WebElement> list_room = room.findElements(By.tagName("option"));
