@@ -4,7 +4,7 @@ package practice;
 
 
 
-public class Generatea4digitrandomnumbers {
+public class GenerateRandomNumberUpto4Digit {
 public static void main(String args[]){
 	double d= Math.random();
 

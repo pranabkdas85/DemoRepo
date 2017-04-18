@@ -1,6 +1,6 @@
 package practice;
 
-public class jaoin_string {
+public class JoinStrings {
 
 	public static void main(String[] args) {
 		String f_name="Pranab ";
