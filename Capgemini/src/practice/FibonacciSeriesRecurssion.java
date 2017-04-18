@@ -1,6 +1,6 @@
 package practice;
 
-public class Fibonacci_series {
+public class FibonacciSeriesRecurssion {
 	public static void main(String args[]){
 		
 	int a0=0;
