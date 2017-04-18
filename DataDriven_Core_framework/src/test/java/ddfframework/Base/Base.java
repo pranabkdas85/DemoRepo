@@ -45,21 +45,15 @@ public class Base {
 			Prop = new Properties();
 			try {
 				FileInputStream fs = new FileInputStream(
-						"C:\\Users\\Admin\\workspace\\DataDriven_Core_framework\\src\\test\\resources\\ProjectConfig.Properties");
+						System.getProperty("user.dir") + ("\\src\\test\\resources\\ProjectConfig.Properties"));
 				Prop.load(fs);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
-		System.setProperty("webdriver.gecko.driver",
-				Prop.getProperty("firefoxdriver_exe"));
-		System.setProperty("webdriver.chrome.driver",
-				Prop.getProperty("chromedriver_exe"));
-		System.setProperty("webdriver.ie.driver",
-				Prop.getProperty("iedriver_exe"));
 
-		if (Browser.equals("Morzilla")) {
-
+		if (Browser.equals("Mozilla")) {
+			System.setProperty("webdriver.gecko.driver", Prop.getProperty("firefoxdriver_exe"));
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 			FirefoxOptions options = new FirefoxOptions();
 			options.setLogLevel(Level.SEVERE);
@@ -67,15 +61,19 @@ public class Base {
 			driver = new FirefoxDriver(capabilities);
 
 		} else if (Browser.equals("Chrome")) {
+			System.setProperty("webdriver.chrome.driver", Prop.getProperty("chromedriver_exe"));
 			ChromeOptions options = new ChromeOptions();
 			Map<String, Object> chromePrefs = new HashMap<String, Object>();
 			chromePrefs.put("credentials_enable_service", false);
 			options.setExperimentalOption("prefs", chromePrefs);
 			options.addArguments("disable-infobars");
 			driver = new ChromeDriver(options);
-		}
-		if (Browser.equals("Internet Explorer")) {
+		} else if (Browser.equals("Internet Explorer")) {
+			System.setProperty("webdriver.ie.driver", Prop.getProperty("iedriver_exe"));
 			driver = new InternetExplorerDriver();
+		}
+		else{
+			ReportFail("Invalid Browser");
 		}
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -88,11 +86,9 @@ public class Base {
 			if (locator_Key.endsWith("_id"))
 				we = driver.findElement(By.id(Prop.getProperty(locator_Key)));
 			else if (locator_Key.endsWith("_xpath"))
-				we = driver
-						.findElement(By.xpath(Prop.getProperty(locator_Key)));
+				we = driver.findElement(By.xpath(Prop.getProperty(locator_Key)));
 			else if (locator_Key.endsWith("_name"))
-				we = driver
-						.findElement(By.name(Prop.getProperty("locator_Key")));
+				we = driver.findElement(By.name(Prop.getProperty("locator_Key")));
 			else {
 				/* ReportFail("Locator is incorrect" + locator_Key); */
 				Assert.fail("Locator is incorrect" + locator_Key);
@@ -111,14 +107,10 @@ public class Base {
 
 	public void Click(String locator_Key) {
 		getelement(locator_Key).click();
-
-		// driver.findElement(By.xpath(Prop.getProperty("NextButon_xpath"))).click();
-
 	}
 
 	public void Type(String locator_Key, String data) {
 		getelement(locator_Key).sendKeys(data);
-
 	}
 
 	// *******************Validation Functions**********
@@ -171,28 +163,18 @@ public class Base {
 	public void TakeScreenShot() {
 
 		Date d = new Date();
-		String screenshotFile = d.toString().replace(":", "_")
-				.replace(" ", "_")
-				+ ".jpg";
-		File scrFile = ((TakesScreenshot) driver)
-				.getScreenshotAs(OutputType.FILE);
+		String screenshotFile = d.toString().replace(":", "_").replace(" ", "_") + ".jpg";
+		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
 		try {
-
 			org.apache.commons.io.FileUtils.copyFile(scrFile,
-					new File(System.getProperty("user.dir")
-							+ "//Screen_Shots//" + screenshotFile));
+					new File(System.getProperty("user.dir") + "//Screen_Shots//" + screenshotFile));
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		test.log(
-				LogStatus.INFO,
-				"ScreenShot->"
-						+ test.addScreenCapture(System.getProperty("user.dir")
-								+ "//Screen_Shots//" + screenshotFile));
-
+		test.log(LogStatus.INFO, "ScreenShot->"
+				+ test.addScreenCapture(System.getProperty("user.dir") + "//Screen_Shots//" + screenshotFile));
 	}
-
 }

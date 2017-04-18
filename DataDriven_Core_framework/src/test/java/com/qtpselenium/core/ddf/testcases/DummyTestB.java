@@ -27,17 +27,16 @@ public class DummyTestB extends Base {
 		else {
 			ReportFail("There is a mismatch in the header text");
 		}
-		/*softassert.assertTrue(false, "Error Message 1");
+		softassert.assertTrue(false, "Error Message 1");
 		softassert.assertTrue(false, "Error Message 2");
 		softassert.assertTrue(true, "Error Message 3");
-		softassert.assertTrue(false, "Error Message 4");*/
+		softassert.assertTrue(false, "Error Message 4");
 
-		// check if email field is present
-		// if the email id field is not present, it will report failure
+		// validate if  email field is present
 		if (!Iselementpresent("Email_xpath"))
 			ReportFail("the email id is not there");
 		else
-			System.out.println("the Header is Pass");
+			ReportPass("The email id is there ");
 
 		Type("Email_xpath", "pranabdas");
 		Click("NextButon_xpath");
