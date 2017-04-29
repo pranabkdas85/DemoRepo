@@ -24,6 +24,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import com.qtpselenium.ExtentManager;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -35,11 +36,12 @@ public class Base {
 
 	public WebDriver driver = null;
 	public Properties Prop;
-
+	public SoftAssert softassert;
+	public String testCaseName;
 	public ExtentReports rep = ExtentManager.getInstance();
 	public ExtentTest test;
-
-	public void OpenBrowser(String Browser) throws IOException {
+	public void init()
+	{
 
 		if (Prop == null) {
 			Prop = new Properties();
@@ -47,10 +49,14 @@ public class Base {
 				FileInputStream fs = new FileInputStream(
 						System.getProperty("user.dir") + ("\\src\\test\\resources\\ProjectConfig.Properties"));
 				Prop.load(fs);
-			} catch (FileNotFoundException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void OpenBrowser(String Browser) throws IOException {
+
 
 		if (Browser.equals("Mozilla")) {
 			System.setProperty("webdriver.gecko.driver", Prop.getProperty("firefoxdriver_exe"));
@@ -71,8 +77,7 @@ public class Base {
 		} else if (Browser.equals("Internet Explorer")) {
 			System.setProperty("webdriver.ie.driver", Prop.getProperty("iedriver_exe"));
 			driver = new InternetExplorerDriver();
-		}
-		else{
+		} else {
 			ReportFail("Invalid Browser");
 		}
 		driver.manage().window().maximize();
@@ -114,8 +119,13 @@ public class Base {
 	}
 
 	// *******************Validation Functions**********
-	public Boolean VerifyTile() {
-		return false;
+	public Boolean VerifyTile(String Login_title) {
+		String Actual_Title = driver.getTitle();
+		String Expected_title = Prop.getProperty("Login_title");
+		if (Actual_Title.equals(Expected_title))
+			return true;
+		else
+			return false;
 	}
 
 	public Boolean Iselementpresent(String locator_Key) {

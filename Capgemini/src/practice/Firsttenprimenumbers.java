@@ -17,7 +17,7 @@ public class Firsttenprimenumbers {
 				count++;
 			}
 			i++;
-			if(count==10)
+			if (count == 10)
 				break;
 		}
 	}

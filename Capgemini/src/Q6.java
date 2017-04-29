@@ -9,7 +9,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 public class Q6 {
 
 	public static void main(String[] args) throws InterruptedException {
-		System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -25,16 +25,13 @@ public class Q6 {
 		driver.findElement(By.id("jpform:fromStation")).sendKeys("New D");
 		WebElement from = driver.findElement(By.id("ui-id-1"));
 		List<WebElement> from_list = from.findElements(By.tagName("li"));
-		System.out.println("total no of values in from is : "
-				+ from_list.size());
+		System.out.println("total no of values in from is : " + from_list.size());
 		System.out.println("The List of stations in from list are: ");
 		for (int i = 0; i < from_list.size(); i++) {
 			System.out.println(from_list.get(i).getText());
 		}
 		for (int i = 0; i < from_list.size(); i++) {
-			if (from_list.get(i).getText().equals("NEW DELHI - NDLS"))
-				;
-			{
+			if (from_list.get(i).getText().equals("NEW DELHI - NDLS")) {
 				from_list.get(i).click();
 				break;
 			}
@@ -57,8 +54,7 @@ public class Q6 {
 		}
 
 		// INPUT Journey Date AND SUUBMIT
-		driver.findElement(By.xpath("//*[@id='jpform:journeyDateInputDate']"))
-				.sendKeys("07-04-2017");
+		driver.findElement(By.xpath("//*[@id='jpform:journeyDateInputDate']")).sendKeys("07-04-2017");
 		driver.findElement(By.id("jpform:flexiDateId")).click();
 		driver.findElement(By.id("jpform:jpsubmit")).click();
 
@@ -67,14 +63,12 @@ public class Q6 {
 		List<WebElement> no_box = box.findElements(By.tagName("input"));
 		System.out.println("The number of Checkbox :" + no_box.size());
 		for (int i = 0; i < no_box.size(); i++) {// DOUBT
-			WebElement span = no_box.get(i).findElement(
-					By.xpath("./following-sibling::span[1]"));
+			WebElement span = no_box.get(i).findElement(By.xpath("./following-sibling::span[1]"));
 			System.out.println(span.getText());
 		}
 		// COUNT THE RADIO BUTTONS
 		WebElement quota = driver.findElement(By.className("captchatxt"));
-		List<WebElement> catagory = quota.findElements(By
-				.xpath("//div[@id='qcbd']/table/tbody/tr/td"));
+		List<WebElement> catagory = quota.findElements(By.xpath("//div[@id='qcbd']/table/tbody/tr/td"));
 		System.out.println("Number of Radio Buttons : " + catagory.size());
 		System.out.println("The radio buttons are :");
 
@@ -84,42 +78,30 @@ public class Q6 {
 		}
 		for (int i = 0; i < catagory.size(); i++) {
 			if (catagory.get(i).getAttribute("checked").equals("checked")) {
-				System.out.println("The element checked is  : "
-						+ catagory.get(i).getText());
+				System.out.println("The element checked is  : " + catagory.get(i).getText());
 			}
 		}
 		// TABLE
-		int no_columns = driver
-				.findElements(
-						By.xpath("//table[@id='avlAndFareForm:trainbtwnstns']/tbody/tr[1]/td"))
+		int no_columns = driver.findElements(By.xpath("//table[@id='avlAndFareForm:trainbtwnstns']/tbody/tr[1]/td"))
 				.size();
-		int no_rows = driver
-				.findElements(
-						By.xpath("//table[@id='avlAndFareForm:trainbtwnstns']/tbody/tr/td[1]"))
+		int no_rows = driver.findElements(By.xpath("//table[@id='avlAndFareForm:trainbtwnstns']/tbody/tr/td[1]"))
 				.size();
 		System.out.println("NO OF columns : " + no_columns);// DOUBT
 		System.out.println("NO OF rows : " + no_rows);// DOUBT
 		for (int c = 1; c < no_rows; c++) {
 			for (int d = 1; d < no_columns; d++) {
-				System.out
-						.print(driver
-								.findElement(
-										By.xpath("//table[@id='avlAndFareForm:trainbtwnstns']/tbody/tr["
-												+ c + "]/td[" + d + "]"))
-								.getText()
-								+ "----");
+				System.out.print(driver
+						.findElement(By
+								.xpath("//table[@id='avlAndFareForm:trainbtwnstns']/tbody/tr[" + c + "]/td[" + d + "]"))
+						.getText() + "----");
 			}
 			System.out.println("");
 		}
-		driver.findElement(
-				By.xpath("//*[@id='avlAndFareForm:trainbtwnstns:0:j_idt478']/a"))
-				.click();
+		driver.findElement(By.xpath("//*[@id='avlAndFareForm:trainbtwnstns:0:j_idt478']/a")).click();
 		// *[@id='avlAndFareForm:trainbtwnstns:0:j_idt478']/a
 
 		Thread.sleep(10000);
-		driver.findElement(
-				By.xpath("//*[@id='avlAndFareForm:trainSchedPanel_content']/div/input"))
-				.click();
+		driver.findElement(By.xpath("//*[@id='avlAndFareForm:trainSchedPanel_content']/div/input")).click();
 
 	}
 }
