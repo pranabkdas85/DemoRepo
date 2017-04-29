@@ -4,7 +4,7 @@ import java.util.Hashtable;
 public class ReadingData {
 
 	public static void main(String[] args) {
-		Xls_Reader xls = new Xls_Reader("F:\\temp\\Data.xlsx");
+		Xls_Reader xls = new Xls_Reader(System.getProperty("user.dir") + "\\Data.xlsx");
 		int rows=xls.getRowCount("Login");
 		System.out.println("Total rows - "+rows);
 		int cols=xls.getColumnCount("Login");
@@ -12,7 +12,7 @@ public class ReadingData {
 		
 		String data = xls.getCellData("Login", "Password", 3);
 		System.out.println(data);
-		 data = xls.getCellData("Login", 0 , 5);
+		 data = xls.getCellData("Login", 0 , 3);
 		 System.out.println(data);
 		 
 		 xls.setCellData("Login", "Password", 20, "appium/selenium");
