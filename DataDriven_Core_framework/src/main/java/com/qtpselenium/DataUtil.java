@@ -2,12 +2,12 @@ package com.qtpselenium;
 
 import java.util.Hashtable;
 
+import freemarker.core.ReturnInstruction.Return;
+
 public class DataUtil {
-	public static Object[][] getTestData(Xls_Reader xls,String testname) {
-		
+	public static Object[][] getTestData(Xls_Reader xls, String testname) {
+
 		String sheetName = "Data";
-		//String testCaseName = "TestB";
-		// reads data for only testCaseName
 
 		int testStartRowNum = 1;
 		while (!xls.getCellData(sheetName, 0, testStartRowNum).equals(testname)) {
@@ -49,8 +49,20 @@ public class DataUtil {
 		return data;
 	}
 
-	
-
+	public static boolean isRuunnable(String testname, Xls_Reader xls) {
+		String sheet = "testcases";
+		boolean result = false;
+		int rows = xls.getRowCount(sheet);
+		for (int r = 2; r <= rows; r++) {
+			String tname = xls.getCellData(sheet, "TCID", r);
+			if (tname.equals(testname)) {
+				String runmode = xls.getCellData(sheet, "Runmode", r);
+				if (runmode.equals("Y"))
+					result = true;
+				else
+					result = false;
+			}
+		}
+		return result;
 	}
-
-
+}

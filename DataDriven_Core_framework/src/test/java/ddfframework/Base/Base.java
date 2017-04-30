@@ -40,8 +40,8 @@ public class Base {
 	public String testCaseName;
 	public ExtentReports rep = ExtentManager.getInstance();
 	public ExtentTest test;
-	public void init()
-	{
+
+	public void init() {
 
 		if (Prop == null) {
 			Prop = new Properties();
@@ -56,7 +56,6 @@ public class Base {
 	}
 
 	public void OpenBrowser(String Browser) throws IOException {
-
 
 		if (Browser.equals("Mozilla")) {
 			System.setProperty("webdriver.gecko.driver", Prop.getProperty("firefoxdriver_exe"));
@@ -93,7 +92,7 @@ public class Base {
 			else if (locator_Key.endsWith("_xpath"))
 				we = driver.findElement(By.xpath(Prop.getProperty(locator_Key)));
 			else if (locator_Key.endsWith("_name"))
-				we = driver.findElement(By.name(Prop.getProperty("locator_Key")));
+				we = driver.findElement(By.name(Prop.getProperty(locator_Key)));
 			else {
 				/* ReportFail("Locator is incorrect" + locator_Key); */
 				Assert.fail("Locator is incorrect" + locator_Key);
