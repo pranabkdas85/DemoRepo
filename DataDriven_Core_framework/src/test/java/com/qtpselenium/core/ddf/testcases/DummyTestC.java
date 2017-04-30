@@ -17,10 +17,12 @@ import com.relevantcodes.extentreports.LogStatus;
 import ddfframework.Base.Base;
 
 public class DummyTestC extends Base {
-	@Test(dataProvider="getData")
+	Xls_Reader xls;
+
+	@Test(dataProvider = "getData")
 	public void TestC(Hashtable<String, String> data) throws IOException {
 		test = rep.startTest("DummyTestC");
-		//System.out.println("das");
+		// System.out.println("das");
 		test.log(LogStatus.INFO, data.toString());
 
 		if (data.get("Runmode").equals("N")) {
@@ -29,7 +31,7 @@ public class DummyTestC extends Base {
 		}
 		test.log(LogStatus.INFO, "Inside C");
 		test.log(LogStatus.FAIL, "Failed");
-		//TakeScreenShot();
+		// TakeScreenShot();
 		test.log(LogStatus.INFO, "ScreenShot-->>" + test.addScreenCapture("D:\\test.jpg"));
 	}
 
@@ -50,7 +52,7 @@ public class DummyTestC extends Base {
 		rep.endTest(test);
 		rep.flush();
 	}
-	
+
 	@DataProvider
 	public Object[][] getData() {
 		init();

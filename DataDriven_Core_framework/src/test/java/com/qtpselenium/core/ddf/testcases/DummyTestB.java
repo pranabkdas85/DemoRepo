@@ -17,28 +17,26 @@ import com.relevantcodes.extentreports.LogStatus;
 import ddfframework.Base.Base;
 
 public class DummyTestB extends Base {
+	Xls_Reader xls;
 
 	@BeforeMethod
 	public void initial() {
-
 		softassert = new SoftAssert();
-
 	}
 
 	@Test(dataProvider = "getData")
 	public void TestB(Hashtable<String, String> data) throws IOException {
 		testCaseName = "TestB";
-
 		test = rep.startTest("DummyTestB");
 		test.log(LogStatus.INFO, "Starting the Test : DummyTestB");
 		test.log(LogStatus.INFO, data.toString());
 
-		if (data.get("Runmode").equals("N")) {
+		if (!DataUtil.isRuunnable(testCaseName, xls) || data.get("Runmode").equals("N")) {
 			test.log(LogStatus.SKIP, "The  test Case is Skipped as Run Mode is N");
 			throw new SkipException("The  test Case is Skipped as Run Mode is N");
 		}
 
-		OpenBrowser("Chrome");
+		OpenBrowser("Mozilla");
 		test.log(LogStatus.INFO, "Starting the Browser");
 		Navigate("aapurl");
 
@@ -50,11 +48,10 @@ public class DummyTestB extends Base {
 		}
 
 		softassert.assertTrue(VerifyText("signintext_xpath", "SigninText"), "There is a mismatch in the header text");
-		/*
-		 * softassert.assertTrue(false, "Error Message 2");
-		 * softassert.assertTrue(true, "Error Message 3");
-		 * softassert.assertTrue(false, "Error Message 4");
-		 */
+
+		softassert.assertTrue(false, "Error Message 2");
+		softassert.assertTrue(true, "Error Message 3");
+		softassert.assertTrue(false, "Error Message 4");
 
 		// validate if email field is present
 		if (!Iselementpresent("Email_xpath"))
@@ -87,7 +84,7 @@ public class DummyTestB extends Base {
 	@DataProvider
 	public Object[][] getData() {
 		init();
-		Xls_Reader xls = new Xls_Reader(System.getProperty("user.dir") + "\\Data.xlsx");
+		xls = new Xls_Reader(System.getProperty("user.dir") + "\\Data.xlsx");
 		return DataUtil.getTestData(xls, "TestB");
 	}
 
