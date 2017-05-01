@@ -22,6 +22,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
@@ -55,10 +56,10 @@ public class Base {
 	}
 
 	public void OpenBrowser(String Browser) throws IOException {
-
+		DesiredCapabilities capabilities = null;
 		if (Browser.equals("Mozilla")) {
 			System.setProperty("webdriver.gecko.driver", Prop.getProperty("firefoxdriver_exe"));
-			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+			capabilities = DesiredCapabilities.firefox();
 			FirefoxOptions options = new FirefoxOptions();
 			options.setLogLevel(Level.SEVERE);
 			capabilities.setCapability("moz:firefoxOptions", options);
@@ -74,7 +75,9 @@ public class Base {
 			driver = new ChromeDriver(options);
 		} else if (Browser.equals("Internet Explorer")) {
 			System.setProperty("webdriver.ie.driver", Prop.getProperty("iedriver_exe"));
-			driver = new InternetExplorerDriver();
+			capabilities = DesiredCapabilities.firefox();
+			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			driver = new InternetExplorerDriver(capabilities);
 		} else {
 			ReportFail("Invalid Browser");
 		}

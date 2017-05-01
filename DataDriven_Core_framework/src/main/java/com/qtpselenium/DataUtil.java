@@ -2,18 +2,23 @@ package com.qtpselenium;
 
 import java.util.Hashtable;
 
-import freemarker.core.ReturnInstruction.Return;
-
 public class DataUtil {
 	public static Object[][] getTestData(Xls_Reader xls, String testname) {
 
 		String sheetName = "Data";
 
 		int testStartRowNum = 1;
-		while (!xls.getCellData(sheetName, 0, testStartRowNum).equals(testname)) {
+		String cellData = xls.getCellData(sheetName, 0, testStartRowNum);
+		while (!cellData.equals(testname) && !cellData.equals("Invalid")) {
 			testStartRowNum++;
 		}
-		System.out.println("Test starts from row - " + testStartRowNum);
+		if(cellData.equals("Invalid")){
+			System.out.println("Sheet name not valid. Invalid sheet name is "+sheetName);
+			return null;
+		}else{
+			System.out.println("Test starts from row - " + testStartRowNum);
+		}
+		
 		int colStartRowNum = testStartRowNum + 1;
 		int dataStartRowNum = testStartRowNum + 2;
 

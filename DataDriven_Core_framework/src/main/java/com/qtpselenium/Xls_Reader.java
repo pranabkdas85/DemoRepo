@@ -115,14 +115,21 @@ public class Xls_Reader {
 	public String getCellData(String sheetName, int colNum, int rowNum) {
 		try {
 			if (rowNum <= 0)
-				return "";
+				return "Invalid";
 
 			int index = workbook.getSheetIndex(sheetName);
 
 			if (index == -1)
-				return "";
+				return "Invalid";
 
 			sheet = workbook.getSheetAt(index);
+			int maxRow = sheet.getLastRowNum();
+			
+			if(rowNum > maxRow)
+				return "Invalid";
+			
+			
+			
 			row = sheet.getRow(rowNum - 1);
 			if (row == null)
 				return "";
