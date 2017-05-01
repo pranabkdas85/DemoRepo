@@ -26,7 +26,7 @@ public class DummyTestA extends Base {
 		testCaseName = "TestA1";
 		test = rep.startTest("DummyTestA:TestA1");
 		test.log(LogStatus.INFO, data.toString());
-		if (!DataUtil.isRuunnable(testCaseName, xls) || data.get("Runmode").equals("N")) {
+		if (!DataUtil.isRuunnable(testCaseName, xls) || data.get("Runmode").toUpperCase().equals("N")) {
 			test.log(LogStatus.SKIP, "The  test Case is Skipped as Run Mode is N");
 			throw new SkipException("The  test Case is Skipped as Run Mode is N");
 		}

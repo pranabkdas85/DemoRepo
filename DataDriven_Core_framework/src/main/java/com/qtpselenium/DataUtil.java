@@ -62,7 +62,7 @@ public class DataUtil {
 			String tname = xls.getCellData(sheet, "TCID", r);
 			if (tname.equals(testname)) {
 				String runmode = xls.getCellData(sheet, "Runmode", r);
-				if (runmode.equals("Y"))
+				if (runmode.toUpperCase().equals("Y"))
 					result = true;
 				else
 					result = false;
