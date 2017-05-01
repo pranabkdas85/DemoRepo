@@ -11,6 +11,7 @@ public class DataUtil {
 		String cellData = xls.getCellData(sheetName, 0, testStartRowNum);
 		while (!cellData.equals(testname) && !cellData.equals("Invalid")) {
 			testStartRowNum++;
+			cellData = xls.getCellData(sheetName, 0, testStartRowNum);
 		}
 		if(cellData.equals("Invalid")){
 			System.out.println("Sheet name not valid. Invalid sheet name is "+sheetName);
