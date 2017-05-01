@@ -14,10 +14,10 @@ public class DataUtil {
 			cellData = xls.getCellData(sheetName, 0, testStartRowNum);
 		}
 		if(cellData.equals("Invalid")){
-			System.out.println("Sheet name not valid. Invalid sheet name is "+sheetName);
-			return null;
+			System.out.println("Either Sheetname or Test Name is not valid. sheet name is "+sheetName+" and test name is "+testname);
+			return new Object[0][0];
 		}else{
-			System.out.println("Test starts from row - " + testStartRowNum);
+			System.out.println("Test "+testname+" starts from row - " + testStartRowNum);
 		}
 		
 		int colStartRowNum = testStartRowNum + 1;
