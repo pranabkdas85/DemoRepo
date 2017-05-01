@@ -40,7 +40,7 @@ public class DummyTestA extends Base {
 		testCaseName = "TestA2";
 		test = rep.startTest("DummyTestA:TestA2");
 		test.log(LogStatus.INFO, data.toString());
-		if (!DataUtil.isRuunnable(testCaseName, xls) || data.get("Runmode").equals("N")) {
+		if (!DataUtil.isRuunnable(testCaseName, xls) || data.get("Runmode").toUpperCase().equals("N")) {
 			test.log(LogStatus.SKIP, testCaseName+": The  test Case is Skipped as Run Mode is N");
 			throw new SkipException(testCaseName+": The  test Case is Skipped as Run Mode is N");
 		}
@@ -52,7 +52,7 @@ public class DummyTestA extends Base {
 	public void TestA3(Hashtable<String, String> data) {
 		testCaseName = "TestA3";
 		test = rep.startTest("DummyTestA:TestA3");
-		if (!DataUtil.isRuunnable(testCaseName, xls) || data.get("Runmode").equals("N")) {
+		if (!DataUtil.isRuunnable(testCaseName, xls) || data.get("Runmode").toUpperCase().equals("N")) {
 			test.log(LogStatus.SKIP, testCaseName+": The  test Case is Skipped as Run Mode is N");
 			throw new SkipException(testCaseName+": The  test Case is Skipped as Run Mode is N");
 		}
