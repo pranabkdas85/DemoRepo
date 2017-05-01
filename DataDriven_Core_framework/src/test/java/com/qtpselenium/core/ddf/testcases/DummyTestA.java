@@ -1,5 +1,6 @@
 package com.qtpselenium.core.ddf.testcases;
 
+import java.lang.reflect.Method;
 import java.util.Hashtable;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -34,7 +35,7 @@ public class DummyTestA extends Base {
 		ReportPass("DummyTestA:TestA1 Passed ");
 	}
 
-	@Test(priority = 2, dataProvider = "getDataA2", dependsOnMethods = { "TestA1" })
+	@Test(priority = 2, dataProvider = "getData")
 	public void TestA2(Hashtable<String, String> data) {
 		testCaseName = "TestA2";
 		test = rep.startTest("DummyTestA:TestA2");
@@ -47,7 +48,7 @@ public class DummyTestA extends Base {
 		ReportPass("DummyTestA:TestA2 Passed ");
 	}
 
-	@Test(priority = 3, dataProvider = "getDataA3", dependsOnMethods = { "TestA2" })
+	@Test(priority = 3, dataProvider = "getData")
 	public void TestA3(Hashtable<String, String> data) {
 		testCaseName = "TestA3";
 		test = rep.startTest("DummyTestA:TestA3");
@@ -71,26 +72,12 @@ public class DummyTestA extends Base {
 		rep.flush();
 	}
 
+	
 	@DataProvider
-	public Object[][] getData() {
+	public Object[][] getData(Method m) {
 		init();
 		xls = new Xls_Reader(System.getProperty("user.dir") + "\\Data.xlsx");
-		return DataUtil.getTestData(xls, "TestA1");
-	}
-
-	@DataProvider
-	public Object[][] getDataA2() {
-		init();
-		xls = new Xls_Reader(System.getProperty("user.dir") + "\\Data.xlsx");
-		return DataUtil.getTestData(xls, "TestA2");
-
-	}
-
-	@DataProvider
-	public Object[][] getDataA3() {
-		init();
-		xls = new Xls_Reader(System.getProperty("user.dir") + "\\Data.xlsx");
-		return DataUtil.getTestData(xls, "TestA3");
+		return DataUtil.getTestData(xls, m.getName());
 
 	}
 }

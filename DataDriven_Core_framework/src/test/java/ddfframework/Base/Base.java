@@ -2,8 +2,8 @@ package ddfframework.Base;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +30,6 @@ import com.qtpselenium.ExtentManager;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import com.sun.jna.platform.FileUtils;
 
 public class Base {
 
@@ -46,8 +45,8 @@ public class Base {
 		if (Prop == null) {
 			Prop = new Properties();
 			try {
-				FileInputStream fs = new FileInputStream(
-						System.getProperty("user.dir") + ("\\src\\test\\resources\\ProjectConfig.Properties"));
+				//FileInputStream fs = new FileInputStream(System.getProperty("user.dir") + ("\\src\\test\\resources\\ProjectConfig.Properties"));
+				InputStream fs = new FileInputStream("src\\test\\resources\\ProjectConfig.Properties");
 				Prop.load(fs);
 			} catch (Exception e) {
 				e.printStackTrace();
