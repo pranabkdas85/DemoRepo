@@ -13,8 +13,11 @@ public class ExtentManager {
 			Date d = new Date();
 			String filename = d.toString().replace(" ", "_").replace(":", "_")
 					+ ".html";
-
-			extent = new ExtentReports("D:\\" + filename);
+			File reportDir = new File("D:\\Reports");
+			if(!reportDir.exists()){
+				reportDir.mkdir();
+			}
+			extent = new ExtentReports(reportDir +"\\"+ filename);
 			extent.loadConfig(new File(System.getProperty("user.dir")
 					+ "\\ReportsConfig.xml"));
 			// optional
