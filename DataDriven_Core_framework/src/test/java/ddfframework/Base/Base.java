@@ -12,6 +12,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -75,11 +76,11 @@ public class Base {
 			driver = new ChromeDriver(options);
 		} else if (Browser.equals("Internet Explorer")) {
 			System.setProperty("webdriver.ie.driver", Prop.getProperty("iedriver_exe"));
-			capabilities = DesiredCapabilities.firefox();
+			capabilities = DesiredCapabilities.internetExplorer();
 			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			driver = new InternetExplorerDriver(capabilities);
 		} else {
-			ReportFail("Invalid Browser");
+			ReportFail("Invalid Browser name provided.");
 		}
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -178,7 +179,7 @@ public class Base {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
 		try {
-			org.apache.commons.io.FileUtils.copyFile(scrFile,
+			FileUtils.copyFile(scrFile,
 					new File(System.getProperty("user.dir") + "//Screen_Shots//" + screenshotFile));
 
 		} catch (IOException e) {
