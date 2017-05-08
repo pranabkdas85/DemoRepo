@@ -40,7 +40,7 @@ public class Q2 {
 		
 		String startDate = "08/06/2021"; // 8th June 2021
 		
-		String endDate = "16/06/2021"; // 16th June 2021
+		String endDate = "08/06/2021"; // 16th June 2021
 
 		driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
 		driver.get("http://www.gingerhotels.com/");
@@ -84,17 +84,44 @@ public class Q2 {
 		Calendar cal =  getFormattedDate(dateInString);
 		if(null==cal){
 			System.out.println("Please provide current or future date");
-			Assert.fail();
+			Assert.fail("Please provide current or future date");
 			return;
 		}
-		if(dateBox.getAttribute("id").equals("checkin"))
+		
+		//Date picker is to be clicked only for checkin
+		if(dateBox.getAttribute("id").equals("checkin")){
 			dateBox.click();
+		}
+			
+		WebElement datePicker = driver.findElement(By.xpath("//div[@class='datepicker dropdown-menu' and not(contains(@style,'none'))]"));
+		
+		//Check for relationship between checkout and checkin date
+		if(dateBox.getAttribute("id").equals("checkout")){
+			String monthYear = datePicker.findElement(By.xpath("./div[contains(@class,'-days')]//th[@class='switch']")).getText();
+			String activeDate = datePicker.findElement(By.xpath(".//td[@class='day  active']")).getText();
+			String checkinString = monthYear+" "+activeDate;
+			
+			Calendar checkincal = Calendar.getInstance();
+			try {
+				checkincal.setTime(new SimpleDateFormat("MMMM yyyy d").parse(checkinString));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			checkincal.add(Calendar.DATE, -1);
+			
+			if(cal.before(checkincal)){
+				System.out.println("Please provide checkout date as equal to or more than checkin date");
+				Assert.fail("Please provide checkout date as equal to or more than checkin date");
+				return;
+			}
+			
+		}
 		
 		String year = String.valueOf(cal.get(Calendar.YEAR));
 		String month = new SimpleDateFormat("MMM").format(cal.getTime());
 		String date = String.valueOf(cal.get(Calendar.DATE));
 		
-		WebElement datePicker = driver.findElement(By.xpath("//div[@class='datepicker dropdown-menu' and not(contains(@style,'none'))]"));
+		
 		if(datePicker.findElement(By.xpath("./div[contains(@class,'-days')]//th[@class='switch']")).getText().contains(year)){
 			//When we are booking in the same year
 			if(datePicker.findElement(By.xpath("./div[contains(@class,'-days')]//th[@class='switch']")).getText().contains(month)){
