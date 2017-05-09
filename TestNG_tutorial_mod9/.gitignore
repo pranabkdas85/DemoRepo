@@ -1,5 +1,6 @@
 /target/
 /bin/
 /test-output/
-
 .classpath
+
+/XSLT_Reports/
