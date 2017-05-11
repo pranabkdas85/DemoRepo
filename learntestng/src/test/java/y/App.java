@@ -1,9 +1,12 @@
 package y;
 
+import org.testng.annotations.Test;
+
 public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
+{	
+   @Test 
+   public void sendmail()
+   {System.out.println("App test");
+	   
+   }
 }
