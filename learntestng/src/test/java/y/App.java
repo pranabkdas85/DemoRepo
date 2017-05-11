@@ -1,4 +1,4 @@
-package com.learntestng.learntestng;
+package y;
 
 public class App 
 {

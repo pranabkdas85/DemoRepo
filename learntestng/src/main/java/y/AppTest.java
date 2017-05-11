@@ -1,4 +1,4 @@
-package com.learntestng.learntestng;
+package y;
 
 import org.testng.annotations.Test;
 
