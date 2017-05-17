@@ -11,8 +11,8 @@ public class Radio_buttons {
 		System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
 		WebDriver driver= new ChromeDriver();
 		driver.get("https://paytm.com/");
-		WebElement radio= driver.findElement(By.xpath("//*[@id='app']/div/div[3]/div/div[2]/div[1]/div[1]/div"));
-		List<WebElement> LOV=radio.findElements(By.className("radioInfo"));
+		WebElement radio=	driver.findElement(By.className("wt_a"));
+		List<WebElement> LOV=radio.findElements(By.name("radio"));
 		System.out.println("The Size of the LOV is: " + LOV.size());
 		LOV.get(0).click();
 		for ( int i =0; i< LOV.size(); i++)

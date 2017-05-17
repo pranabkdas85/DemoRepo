@@ -28,7 +28,7 @@ public class Q2 {
 		capabilities.setCapability("moz:firefoxOptions", options);
 		WebDriver driver = new FirefoxDriver(capabilities);*/
 		
-		System.setProperty("webdriver.chrome.driver", "D:/Coding/jars/chromedriver_win32_2.29/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();
 		Map<String, Object> chromePrefs = new HashMap<String, Object>();
 		chromePrefs.put("credentials_enable_service", false);

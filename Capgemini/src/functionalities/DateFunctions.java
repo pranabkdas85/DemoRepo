@@ -1,5 +1,6 @@
 package functionalities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateFunctions {
@@ -17,13 +18,17 @@ public class DateFunctions {
 	System.out.println(d.after(d1));
 	System.out.println(d.before(d1));
 
-	
 	System.out.println(d.clone());
 	System.out.println(d.compareTo(d1));
 	
-	
-	
 	System.out.println(d.toString());
+	
+	String currentmonth = new SimpleDateFormat("MMMM").format(d);
+	String currentyear = new SimpleDateFormat("yyyy").format(d);
+	String currentday = new SimpleDateFormat("d").format(d);
+	
+	System.out.println(currentday+ currentmonth + currentyear);
+
 	}
 
 }
