@@ -47,7 +47,9 @@ public class Base {
 		if (Prop == null) {
 			Prop = new Properties();
 			try {
-				//FileInputStream fs = new FileInputStream(System.getProperty("user.dir") + ("\\src\\test\\resources\\ProjectConfig.Properties"));
+				// FileInputStream fs = new
+				// FileInputStream(System.getProperty("user.dir") +
+				// ("\\src\\test\\resources\\ProjectConfig.Properties"));
 				InputStream fs = new FileInputStream("src\\test\\resources\\ProjectConfig.Properties");
 				Prop.load(fs);
 			} catch (Exception e) {
@@ -103,7 +105,7 @@ public class Base {
 		} catch (Exception e) {
 			/* ReportFail(e.getMessage()); */
 			e.printStackTrace();
-			Assert.fail("Failed Test Case" + e.getMessage());
+			ReportFail(e.getMessage());
 		}
 		return we;
 	}
@@ -179,8 +181,7 @@ public class Base {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
 		try {
-			FileUtils.copyFile(scrFile,
-					new File(System.getProperty("user.dir") + "//Screen_Shots//" + screenshotFile));
+			FileUtils.copyFile(scrFile, new File(System.getProperty("user.dir") + "//Screen_Shots//" + screenshotFile));
 
 		} catch (IOException e) {
 			e.printStackTrace();
