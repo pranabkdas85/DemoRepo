@@ -36,7 +36,7 @@ public class DummyTestB extends Base {
 			throw new SkipException("The  test Case is Skipped as Run Mode is N");
 		}
 
-		OpenBrowser("Mozilla");
+		OpenBrowser("Chrome");
 		test.log(LogStatus.INFO, "Starting the Browser");
 		Navigate("aapurl");
 

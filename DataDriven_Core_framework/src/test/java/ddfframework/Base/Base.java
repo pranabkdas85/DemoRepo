@@ -61,7 +61,7 @@ public class Base {
 	public void OpenBrowser(String Browser) throws IOException {
 		DesiredCapabilities capabilities = null;
 		if (Browser.equals("Mozilla")) {
-			System.setProperty("webdriver.gecko.driver", Prop.getProperty("firefoxdriver_exe"));
+			System.setProperty("webdriver.gecko.driver","C:\\geckodriver.exe");
 			capabilities = DesiredCapabilities.firefox();
 			FirefoxOptions options = new FirefoxOptions();
 			options.setLogLevel(Level.SEVERE);
@@ -69,7 +69,7 @@ public class Base {
 			driver = new FirefoxDriver(capabilities);
 
 		} else if (Browser.equals("Chrome")) {
-			System.setProperty("webdriver.chrome.driver", Prop.getProperty("chromedriver_exe"));
+			System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
 			ChromeOptions options = new ChromeOptions();
 			Map<String, Object> chromePrefs = new HashMap<String, Object>();
 			chromePrefs.put("credentials_enable_service", false);
@@ -77,7 +77,7 @@ public class Base {
 			options.addArguments("disable-infobars");
 			driver = new ChromeDriver(options);
 		} else if (Browser.equals("Internet Explorer")) {
-			System.setProperty("webdriver.ie.driver", Prop.getProperty("iedriver_exe"));
+			System.setProperty("webdriver.ie.driver","C:\\IEDriverServer.exe");
 			capabilities = DesiredCapabilities.internetExplorer();
 			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			driver = new InternetExplorerDriver(capabilities);
