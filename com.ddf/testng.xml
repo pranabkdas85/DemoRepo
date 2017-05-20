@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="My Sample Suite">
+<test name="DummyTestA">
+    <classes>
+        <class name="com.qtpselenium.core.ddf.testcases.DummyTestA" ></class>  
+    </classes>
+</test>
+<test name="DummyTestB">
+    <classes>
+        <class name="com.qtpselenium.core.ddf.testcases.DummyTestB" ></class>  
+    </classes>
+</test>
+<test name="DummyTestC">
+    <classes>
+        <class name="com.qtpselenium.core.ddf.testcases.DummyTestC" ></class>  
+    </classes>
+</test>
+</suite>
