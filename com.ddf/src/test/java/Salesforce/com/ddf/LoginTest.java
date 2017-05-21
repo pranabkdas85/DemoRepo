@@ -39,16 +39,15 @@ public class LoginTest extends Base {
 		String actual_Result = null;
 		if (Iselementpresent("userlevel_xpath")) {
 			test.log(LogStatus.INFO, "Logged in Sucessfully");
-			actual_Result="Y";
-			
+			actual_Result = "Y";
+
 		} else {
 			test.log(LogStatus.INFO, "Logged in Failed");
-			actual_Result="N";
+			actual_Result = "N";
 		}
-		if (actual_Result.equals(data.get("ExpectedResult"))){
+		if (actual_Result.equals(data.get("ExpectedResult"))) {
 			ReportPass(" the Test Case is passed");
-		}
-		else{
+		} else {
 			ReportFail("The test case is failed");
 		}
 		driver.close();

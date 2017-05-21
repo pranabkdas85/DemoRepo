@@ -10,28 +10,22 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-
 import com.relevantcodes.extentreports.LogStatus;
-
 
 public class Contacts extends base.Base {
 	Xls_Reader xls;
 
 	@Test(dataProvider = "getData")
 	public void Contacts_dropdown(Hashtable<String, String> data) throws IOException {
+		testCaseName = "Contacts";
 		test = rep.startTest("Contacts_dropdown");
-		// System.out.println("das");
 		test.log(LogStatus.INFO, data.toString());
-
-		if (data.get("Runmode").equals("N")) {
-			test.log(LogStatus.SKIP, "The  test Case is Skipped as Run Mode is N");
-			throw new SkipException("The  test Case is Skipped as Run Mode is N");
+		if (!DataUtil.isRuunnable(testCaseName, xls) || data.get("Runmode").toUpperCase().equals("N")) {
+			test.log(LogStatus.SKIP, testCaseName + ": The  test Case is Skipped as Run Mode is N");
+			throw new SkipException(testCaseName + ": The  test Case is Skipped as Run Mode is N");
 		}
-		test.log(LogStatus.INFO, "Inside C");
-		
-		
-		
-		
+		test.log(LogStatus.INFO, "Starting the Test");
+
 	}
 
 	@BeforeMethod
