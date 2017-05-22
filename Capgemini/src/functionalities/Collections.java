@@ -8,11 +8,11 @@ public class Collections {
 
 	public static void main(String[] args) {
 
-		ArrayList<String> arraylist= new ArrayList<String>();
+		ArrayList<String> arraylist = new ArrayList<String>();
 		arraylist.add("Pranab");
 		arraylist.add("Kumar");
 		arraylist.add("Das");
-		
+
 		System.out.println(arraylist.size());
 		System.out.println(arraylist.get(0));
 		System.out.println(arraylist.isEmpty());
@@ -22,12 +22,11 @@ public class Collections {
 		System.out.println(arraylist.size());
 		arraylist.add("Das");
 		System.out.println(arraylist.lastIndexOf("Kumar"));
-		
-		ArrayList<Integer> arraylistint= new ArrayList<Integer>();
-		
-	
-		
-		
+
+		String[] Str = new String[arraylist.size()];
+		arraylist.toArray(Str);
+		System.out.println(Str[1]);
+
 	}
 
 }
