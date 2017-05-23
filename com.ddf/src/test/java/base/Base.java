@@ -170,6 +170,7 @@ public class Base {
 			test.log(LogStatus.INFO ,"Window switched");
 			if(Iselementpresent(locator_key))
 			{
+				System.out.println("inside the if condition");
 				test.log(LogStatus.INFO,"The element is found");
 				Click(locator_key);
 				break;
