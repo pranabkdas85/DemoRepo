@@ -78,6 +78,7 @@ public class Contacts extends base.Base {
 		popupselectaccount("accountpopup_xpath");
 		Type("Lastname_xpath", "Das");
 		Click("savebtn_xpath");
+		driver.close();
 
 	}
 
