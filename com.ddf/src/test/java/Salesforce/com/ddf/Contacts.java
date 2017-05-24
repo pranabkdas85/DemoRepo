@@ -19,7 +19,7 @@ import com.relevantcodes.extentreports.LogStatus;
 public class Contacts extends base.Base {
 	Xls_Reader xls;
 
-	@Test(dataProvider = "getData")
+	@Test(dataProvider = "getData", priority = 1)
 	public void Contacts_dropdown(Hashtable<String, String> data) throws IOException {
 		testCaseName = "Contacts_dropdown";
 		test = rep.startTest("Contacts_dropdown");
@@ -49,7 +49,7 @@ public class Contacts extends base.Base {
 		driver.close();
 	}
 
-	@Test(dataProvider = "getData")
+	@Test(dataProvider = "getData", priority = 2)
 	public void createcontacts(Hashtable<String, String> data) throws IOException {
 		testCaseName = "createcontacts";
 		test = rep.startTest("createcontacts");
