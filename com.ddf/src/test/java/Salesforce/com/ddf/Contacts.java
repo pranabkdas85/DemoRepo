@@ -77,9 +77,10 @@ public class Contacts extends base.Base {
 		s.selectByVisibleText("Mr.");
 		Type("FirstName_id", "Pranab");
 		Type("Middlename_id", "Kumar");
-		Type("Lastname_xpath", "Das");
 		Click("openAccount_xpath");
-		selectvalueinpopupwindow("accountpopup_xpath");
+		popupselectaccount("accountpopup_xpath");
+		Type("Lastname_xpath", "Das");
+		Click("savebtn_xpath");
 
 	}
 
