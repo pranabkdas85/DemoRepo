@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -167,17 +169,38 @@ public class Base {
 		while (it.hasNext()) {
 			popup_window = it.next();
 			driver.switchTo().window(popup_window);
-			test.log(LogStatus.INFO ,"Window switched");
-			if(Iselementpresent(locator_key))
-			{
+			test.log(LogStatus.INFO, "Window switched");
+			if (Iselementpresent(locator_key)) {
 				System.out.println("inside the if condition");
-				test.log(LogStatus.INFO,"The element is found");
+				test.log(LogStatus.INFO, "The element is found");
 				Click(locator_key);
 				break;
 			}
 		}
 		driver.switchTo().defaultContent();
-		
+
+	}
+
+	public void selectdate(String date) throws ParseException, InterruptedException {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("d/MM/yyyy");
+		Date datetobeselected = sdf.parse(date);
+
+		String d = new SimpleDateFormat("d").format(datetobeselected);
+		String month = new SimpleDateFormat("MM").format(datetobeselected);
+		int monthint = Integer.parseInt(month);
+		String year = new SimpleDateFormat("yyyy").format(datetobeselected);
+		System.out.println("date:" + d + "month:" + monthint + "year:" + year);
+		System.out.println("selecting the year");
+		Select s = new Select(getelement("yeardropdown_xpath"));
+		s.selectByValue(year);
+		System.out.println("selecting the month");
+		s = new Select(getelement("monthdropdown_xpath"));
+		Thread.sleep(6000);
+		getlovs("monthdropdown_xpath");
+		s.selectByIndex(monthint - 1);
+		System.out.println("selecting the date");
+		Click("date_xpath");
 	}
 
 	// **********APP Functions*********************
