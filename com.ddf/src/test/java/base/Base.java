@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -34,7 +35,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Set;
+
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -67,7 +68,6 @@ public class Base {
 		}
 	}
 	// ******************generic Functions******************************
-
 	public void OpenBrowser(String Browser) throws IOException {
 		DesiredCapabilities capabilities = null;
 		if (Browser.equals("Mozilla")) {
@@ -77,7 +77,6 @@ public class Base {
 			options.setLogLevel(Level.SEVERE);
 			capabilities.setCapability("moz:firefoxOptions", options);
 			driver = new FirefoxDriver(capabilities);
-
 		} else if (Browser.equals("Chrome")) {
 			System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
 			ChromeOptions options = new ChromeOptions();
@@ -97,7 +96,6 @@ public class Base {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}
-
 	// Responsible to find element in the Page
 	public WebElement getelement(String locator_Key) {
 		test.log(LogStatus.INFO, "Inside the getelement function");
@@ -120,20 +118,21 @@ public class Base {
 		}
 		return we;
 	}
-
 	public void Navigate(String appurl) {
 		driver.get(Prop.getProperty("appurl"));
 	}
-
 	public void Click(String locator_Key) {
 		test.log(LogStatus.INFO, "clicking on" + locator_Key);
 		getelement(locator_Key).click();
 	}
-
 	public void Type(String locator_Key, String data) {
 		getelement(locator_Key).sendKeys(data);
 	}
-
+	public void selectlov(String locator_key, int index) {
+		WebElement we = getelement(locator_key);
+		Select s = new Select(we);
+		s.selectByIndex(index);
+	}
 	public String[] getlovs(String locator_key) {
 		test.log(LogStatus.INFO, "Inside the getlov function to get the list of values");
 		ArrayList<String> arl = new ArrayList<String>();
@@ -160,7 +159,45 @@ public class Base {
 		driver.switchTo().window(Mainwindow);
 	}
 
-	public void selectvalueinpopupwindow(String locator_key) {
+	public void selectdate(String date) throws ParseException, InterruptedException {
+		SimpleDateFormat sdf = new SimpleDateFormat("d/MM/yyyy");
+		Date datetobeselected = sdf.parse(date);
+		String d = new SimpleDateFormat("d").format(datetobeselected);
+		String month = new SimpleDateFormat("MM").format(datetobeselected);
+		int monthint = Integer.parseInt(month);
+		String year = new SimpleDateFormat("yyyy").format(datetobeselected);
+		System.out.println("date:" + d + "month:" + monthint + "year:" + year);
+		Select s = new Select(getelement("yeardropdown_xpath"));
+		s.selectByValue(year);
+		s = new Select(getelement("monthdropdown_xpath"));
+		Thread.sleep(6000);
+		getlovs("monthdropdown_xpath");
+		s.selectByIndex(monthint - 1);
+		driver.findElement(By.xpath("//div[@id='datePicker']//table[@id='datePickerCalendar']//td[text()='" + d + "']"))
+				.click();
+	}
+
+	public String generaterandomname(int n) {
+		char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+		StringBuilder sb = new StringBuilder();
+		Random random = new Random();
+		for (int i = 0; i < n; i++) {
+			char c = chars[random.nextInt(chars.length)];
+			sb.append(c);
+		}
+		String output = sb.toString();
+		return output;
+	}
+
+	// **********APP Functions*********************
+	public void userlogin(String userid, String password) {
+		test.log(LogStatus.INFO, "login by id: " + userid + " and password: " + password);
+		Type("Loginid_xpath", userid);
+		Type("password_xpath", password);
+		Click("Loginbutton_xpath");
+	}
+
+	public void popupselectaccount(String locator_key) {
 		java.util.Set<String> windowsid = driver.getWindowHandles();
 		System.out.println("the number of windows are " + windowsid.size());
 		java.util.Iterator<String> it = windowsid.iterator();
@@ -170,45 +207,10 @@ public class Base {
 			popup_window = it.next();
 			driver.switchTo().window(popup_window);
 			test.log(LogStatus.INFO, "Window switched");
-			if (Iselementpresent(locator_key)) {
-				System.out.println("inside the if condition");
-				test.log(LogStatus.INFO, "The element is found");
-				Click(locator_key);
-				break;
-			}
+			driver.switchTo().frame(1);
+			Click(locator_key);
 		}
-		driver.switchTo().defaultContent();
-
-	}
-
-	public void selectdate(String date) throws ParseException, InterruptedException {
-
-		SimpleDateFormat sdf = new SimpleDateFormat("d/MM/yyyy");
-		Date datetobeselected = sdf.parse(date);
-
-		String d = new SimpleDateFormat("d").format(datetobeselected);
-		String month = new SimpleDateFormat("MM").format(datetobeselected);
-		int monthint = Integer.parseInt(month);
-		String year = new SimpleDateFormat("yyyy").format(datetobeselected);
-		System.out.println("date:" + d + "month:" + monthint + "year:" + year);
-		System.out.println("selecting the year");
-		Select s = new Select(getelement("yeardropdown_xpath"));
-		s.selectByValue(year);
-		System.out.println("selecting the month");
-		s = new Select(getelement("monthdropdown_xpath"));
-		Thread.sleep(6000);
-		getlovs("monthdropdown_xpath");
-		s.selectByIndex(monthint - 1);
-		System.out.println("selecting the date");
-		Click("date_xpath");
-	}
-
-	// **********APP Functions*********************
-	public void userlogin(String userid, String password) {
-		test.log(LogStatus.INFO, "login by id: " + userid + " and password: " + password);
-		Type("Loginid_xpath", userid);
-		Type("password_xpath", password);
-		Click("Loginbutton_xpath");
+		driver.switchTo().window(Mainwindows);
 	}
 
 	// *******************Validation Functions**********
@@ -238,18 +240,15 @@ public class Base {
 			return false;
 		else
 			return true;
-
 	}
 
 	public Boolean VerifyText(String locator_key, String expectedtextkey) {
 		String actual_text = getelement(locator_key).getText().trim();
 		String expected_text = Prop.getProperty(expectedtextkey);
-
 		if (actual_text.equals(expected_text))
 			return true;
 		else
 			return false;
-
 	}
 
 	// ****************Reporting Functions************
@@ -257,7 +256,6 @@ public class Base {
 	public void ReportPass(String msg) {
 		test.log(LogStatus.PASS, msg);
 	}
-
 	public void ReportFail(String msg) {
 		test.log(LogStatus.FAIL, msg);
 		TakeScreenShot();
@@ -265,18 +263,14 @@ public class Base {
 	}
 
 	public void TakeScreenShot() {
-
 		Date d = new Date();
 		String screenshotFile = d.toString().replace(":", "_").replace(" ", "_") + ".jpg";
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
 		try {
 			FileUtils.copyFile(scrFile, new File(System.getProperty("user.dir") + "//Screen_Shots//" + screenshotFile));
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		test.log(LogStatus.INFO, "ScreenShot->"
 				+ test.addScreenCapture(System.getProperty("user.dir") + "//Screen_Shots//" + screenshotFile));
 	}
