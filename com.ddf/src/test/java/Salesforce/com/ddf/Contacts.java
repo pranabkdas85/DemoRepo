@@ -46,7 +46,7 @@ public class Contacts extends base.Base {
 			ReportPass("The List of values matched for the contacts");
 		}
 
-		driver.close();
+		
 	}
 
 	@Test(dataProvider = "getData", priority = 2)
@@ -60,11 +60,8 @@ public class Contacts extends base.Base {
 			throw new SkipException(testCaseName + ": The  test Case is Skipped as Run Mode is N");
 		}
 
-		test.log(LogStatus.INFO, "Starting the Test");
-		OpenBrowser("Chrome");
-		Navigate("appurl");
-		userlogin(Prop.getProperty("uderid"), Prop.getProperty("password"));
-		Click("contacts_xpath");
+		test.log(LogStatus.INFO, "Starting the " + testCaseName + "Test");
+
 		Click("contacts_newButton_xpath");
 		String[] fnlov = getlovs("FirstNameLOV_id");
 		String[] expectedfnlov = data.get("fnlov").split(",");
