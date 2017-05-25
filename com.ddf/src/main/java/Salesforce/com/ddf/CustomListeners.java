@@ -6,7 +6,7 @@ import org.testng.TestListenerAdapter;
 public class CustomListeners extends TestListenerAdapter{
 	
 	public void onTestSuccess(ITestResult tr){
-		System.out.println("Tthe test Case is Passed");
+		System.out.println("The test Case is Passed");
 		
 	}
 
