@@ -1,5 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="My Sample Suite">
+
+<listeners>
+<listener class-name="Salesforce.com.ddf.CustomListeners"></listener>
+</listeners>
+
+
 <test name="Contacts">
     <classes>
         <class name="Salesforce.com.ddf.Contacts" ></class>  

@@ -66,6 +66,7 @@ public class Base {
 			}
 		}
 	}
+
 	// ******************generic Functions******************************
 	public void OpenBrowser(String Browser) throws IOException {
 		DesiredCapabilities capabilities = null;
@@ -95,9 +96,10 @@ public class Base {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}
+
 	// Responsible to find element in the Page
 	public WebElement getelement(String locator_Key) {
-		test.log(LogStatus.INFO, "Inside the getelement function");
+		test.log(LogStatus.INFO, "Inside the getelement function and searching for " + locator_Key);
 		WebElement we = null;
 		try {
 			if (locator_Key.endsWith("_id"))
@@ -117,21 +119,28 @@ public class Base {
 		}
 		return we;
 	}
+
 	public void Navigate(String appurl) {
+		test.log(LogStatus.INFO, " Oppening the url :" + appurl);
 		driver.get(Prop.getProperty("appurl"));
 	}
+
 	public void Click(String locator_Key) {
 		test.log(LogStatus.INFO, "clicking on" + locator_Key);
 		getelement(locator_Key).click();
 	}
+
 	public void Type(String locator_Key, String data) {
 		getelement(locator_Key).sendKeys(data);
+		test.log(LogStatus.INFO, "Typed: " + data + "onto the field :" + locator_Key);
 	}
+
 	public void selectlov(String locator_key, int index) {
 		WebElement we = getelement(locator_key);
 		Select s = new Select(we);
 		s.selectByIndex(index);
 	}
+
 	public String[] getlovs(String locator_key) {
 		test.log(LogStatus.INFO, "Inside the getlov function to get the list of values");
 		ArrayList<String> arl = new ArrayList<String>();
@@ -154,6 +163,7 @@ public class Base {
 			String popup_window = it.next();
 			driver.switchTo().window(popup_window);
 			driver.close();
+			test.log(LogStatus.INFO,"closed the pop up window");
 		}
 		driver.switchTo().window(Mainwindow);
 	}
@@ -185,6 +195,7 @@ public class Base {
 			sb.append(c);
 		}
 		String output = sb.toString();
+		test.log(LogStatus.INFO," The Random Number generated is : " + output );
 		return output;
 	}
 
@@ -255,6 +266,7 @@ public class Base {
 	public void ReportPass(String msg) {
 		test.log(LogStatus.PASS, msg);
 	}
+
 	public void ReportFail(String msg) {
 		test.log(LogStatus.FAIL, msg);
 		TakeScreenShot();
@@ -273,23 +285,23 @@ public class Base {
 		test.log(LogStatus.INFO, "ScreenShot->"
 				+ test.addScreenCapture(System.getProperty("user.dir") + "//Screen_Shots//" + screenshotFile));
 	}
-	
-	public String getDriverPath(String browser){
+
+	public String getDriverPath(String browser) {
 		String driverPath = null;
 		String pathFromEnv = null;
-		
-		switch(browser){
+
+		switch (browser) {
 		case "Mozilla":
 			pathFromEnv = System.getenv("GECKODRIVER_HOME");
-			driverPath = null==pathFromEnv?Prop.getProperty(browser):pathFromEnv;
+			driverPath = null == pathFromEnv ? Prop.getProperty(browser) : pathFromEnv;
 			break;
 		case "Chrome":
 			pathFromEnv = System.getenv("CHROMEDRIVER_HOME");
-			driverPath = null==pathFromEnv?Prop.getProperty(browser):pathFromEnv;
+			driverPath = null == pathFromEnv ? Prop.getProperty(browser) : pathFromEnv;
 			break;
 		case "IE":
 			pathFromEnv = System.getenv("IEDRIVERSERVER_HOME");
-			driverPath = null==pathFromEnv?Prop.getProperty(browser):pathFromEnv;
+			driverPath = null == pathFromEnv ? Prop.getProperty(browser) : pathFromEnv;
 			break;
 		}
 		return driverPath;
