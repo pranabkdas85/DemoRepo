@@ -15,11 +15,11 @@ public class Application_Test {
 	
 	@BeforeTest
 	public void beforetest(){
-		System.out.println("Before executing the test");
+		System.out.println("Before Test");
 	}
 	@AfterTest
 	public void aftertest(){
-		System.out.println("After executing the test");
+		System.out.println("After Test");
 	}
 	@BeforeMethod
 	public void beforemethod(){
@@ -41,9 +41,9 @@ public class Application_Test {
 	public void doLogin(){
 		System.out.println("Login Test Execution");
 		//throw new SkipException("Any Error");
-		softassert = new SoftAssert();
+		/*softassert = new SoftAssert();
 		softassert.fail("Error message ");
-		softassert.assertAll();
+		softassert.assertAll();*/
 		}
 	@Test(priority=2,dependsOnMethods={"doLogin"})
 	public void doPasswordchange(){
