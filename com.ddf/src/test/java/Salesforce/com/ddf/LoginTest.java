@@ -33,7 +33,7 @@ public class LoginTest extends Base {
 		}
 
 		test.log(LogStatus.INFO, "Staring the test");
-		OpenBrowser("Chrome");
+		OpenBrowser(Prop.getProperty("browser"));
 		Navigate("appurl");
 		userlogin(data.get("UserName"), data.get("Password"));
 		String actual_Result = null;

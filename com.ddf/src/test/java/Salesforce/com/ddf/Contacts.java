@@ -13,7 +13,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class Contacts extends base.Base {
@@ -31,7 +30,7 @@ public class Contacts extends base.Base {
 		}
 
 		test.log(LogStatus.INFO, "Starting the Test");
-		OpenBrowser("Chrome");
+		OpenBrowser(Prop.getProperty("browser"));
 		Navigate("appurl");
 		userlogin(Prop.getProperty("uderid"), Prop.getProperty("password"));
 		// click on contact tab

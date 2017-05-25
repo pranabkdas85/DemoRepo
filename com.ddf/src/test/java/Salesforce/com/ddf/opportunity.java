@@ -36,7 +36,7 @@ public class opportunity extends Base {
 		}
 
 		test.log(LogStatus.INFO, "Staring the test");
-		OpenBrowser("Chrome");
+		OpenBrowser(Prop.getProperty("browser"));
 		Navigate("appurl");
 		userlogin(Prop.getProperty("uderid"), Prop.getProperty("password"));
 		Click("opportinitytab_xpath");

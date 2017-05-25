@@ -35,11 +35,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
-
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import Salesforce.com.ddf.Constants;
 import Salesforce.com.ddf.ExtentManager;
 
 public class Base {
@@ -59,8 +59,7 @@ public class Base {
 				// FileInputStream fs = new
 				// FileInputStream(System.getProperty("user.dir") +
 				// ("\\src\\test\\resources\\ProjectConfig.Properties"));
-				InputStream fs = new FileInputStream(System.getProperty("user.dir")
-						+ "\\src\\main\\java\\src\\test\\resources\\ProjectConfig.Properties");
+				InputStream fs = new FileInputStream(Constants.propertiesFilePath);
 				Prop.load(fs);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -71,22 +70,22 @@ public class Base {
 	public void OpenBrowser(String Browser) throws IOException {
 		DesiredCapabilities capabilities = null;
 		if (Browser.equals("Mozilla")) {
-			System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver", getDriverPath(Browser));
 			capabilities = DesiredCapabilities.firefox();
 			FirefoxOptions options = new FirefoxOptions();
 			options.setLogLevel(Level.SEVERE);
 			capabilities.setCapability("moz:firefoxOptions", options);
 			driver = new FirefoxDriver(capabilities);
 		} else if (Browser.equals("Chrome")) {
-			System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", getDriverPath(Browser));
 			ChromeOptions options = new ChromeOptions();
 			Map<String, Object> chromePrefs = new HashMap<String, Object>();
 			chromePrefs.put("credentials_enable_service", false);
 			options.setExperimentalOption("prefs", chromePrefs);
 			options.addArguments("disable-infobars");
 			driver = new ChromeDriver(options);
-		} else if (Browser.equals("Internet Explorer")) {
-			System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer.exe");
+		} else if (Browser.equals("IE")) {
+			System.setProperty("webdriver.ie.driver", getDriverPath(Browser));
 			capabilities = DesiredCapabilities.internetExplorer();
 			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			driver = new InternetExplorerDriver(capabilities);
@@ -231,7 +230,7 @@ public class Base {
 		else if (locator_Key.endsWith("_xpath"))
 			e = driver.findElements(By.xpath(Prop.getProperty(locator_Key)));
 		else if (locator_Key.endsWith("_name"))
-			e = driver.findElements(By.name(Prop.getProperty("locator_Key")));
+			e = driver.findElements(By.name(Prop.getProperty(locator_Key)));
 		else {
 			ReportFail("Locator is incorrect" + locator_Key);
 			Assert.fail("Locator is incorrect" + locator_Key);
@@ -273,5 +272,26 @@ public class Base {
 		}
 		test.log(LogStatus.INFO, "ScreenShot->"
 				+ test.addScreenCapture(System.getProperty("user.dir") + "//Screen_Shots//" + screenshotFile));
+	}
+	
+	public String getDriverPath(String browser){
+		String driverPath = null;
+		String pathFromEnv = null;
+		
+		switch(browser){
+		case "Mozilla":
+			pathFromEnv = System.getenv("GECKODRIVER_HOME");
+			driverPath = null==pathFromEnv?Prop.getProperty(browser):pathFromEnv;
+			break;
+		case "Chrome":
+			pathFromEnv = System.getenv("CHROMEDRIVER_HOME");
+			driverPath = null==pathFromEnv?Prop.getProperty(browser):pathFromEnv;
+			break;
+		case "IE":
+			pathFromEnv = System.getenv("IEDRIVERSERVER_HOME");
+			driverPath = null==pathFromEnv?Prop.getProperty(browser):pathFromEnv;
+			break;
+		}
+		return driverPath;
 	}
 }
