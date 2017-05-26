@@ -163,7 +163,7 @@ public class Base {
 			String popup_window = it.next();
 			driver.switchTo().window(popup_window);
 			driver.close();
-			test.log(LogStatus.INFO,"closed the pop up window");
+			test.log(LogStatus.INFO, "closed the pop up window");
 		}
 		driver.switchTo().window(Mainwindow);
 	}
@@ -175,7 +175,6 @@ public class Base {
 		String month = new SimpleDateFormat("MM").format(datetobeselected);
 		int monthint = Integer.parseInt(month);
 		String year = new SimpleDateFormat("yyyy").format(datetobeselected);
-		System.out.println("date:" + d + "month:" + monthint + "year:" + year);
 		Select s = new Select(getelement("yeardropdown_xpath"));
 		s.selectByValue(year);
 		s = new Select(getelement("monthdropdown_xpath"));
@@ -195,7 +194,7 @@ public class Base {
 			sb.append(c);
 		}
 		String output = sb.toString();
-		test.log(LogStatus.INFO," The Random Number generated is : " + output );
+		test.log(LogStatus.INFO, " The Random Number generated is : " + output);
 		return output;
 	}
 
@@ -209,7 +208,6 @@ public class Base {
 
 	public void popupselectaccount(String locator_key) {
 		java.util.Set<String> windowsid = driver.getWindowHandles();
-		System.out.println("the number of windows are " + windowsid.size());
 		java.util.Iterator<String> it = windowsid.iterator();
 		String Mainwindows = it.next();
 		String popup_window = null;
