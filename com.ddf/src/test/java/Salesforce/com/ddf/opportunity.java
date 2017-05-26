@@ -26,7 +26,8 @@ public class opportunity extends Base {
 	}
 
 	@Test(dataProvider = "getData", priority = 1)
-	public void createopportunity(Hashtable<String, String> data) throws IOException, ParseException, InterruptedException {
+	public void createopportunity(Hashtable<String, String> data)
+			throws IOException, ParseException, InterruptedException {
 		testCaseName = "createopportunity";
 		test = rep.startTest("createopportunity");
 		test.log(LogStatus.INFO, data.toString());
@@ -42,14 +43,15 @@ public class opportunity extends Base {
 		Click("opportinitytab_xpath");
 		Click("newopportunitybutton_xpath");
 		Click("closedate_xpath");
-		selectdate("26/8/2018");
-		Type("oppname_xpath", "oppotunityname");
+		selectdate(data.get("Closedate"));
+		Type("oppname_xpath", data.get("oppname"));
 		Click("oppopenAccount_xpath");
 		popupselectaccount("accountpopup_xpath");
-		selectlov("stage_xpath",2);
+		selectlov("stage_xpath", 2);
+		Type("description_xpath", generaterandomname(7));
 		Click("savebtn_xpath");
 		driver.close();
-		
+
 	}
 
 	@AfterMethod
