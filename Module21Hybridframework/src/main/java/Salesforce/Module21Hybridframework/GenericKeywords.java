@@ -128,7 +128,7 @@ public class GenericKeywords {
 
 	public String closeBrowser() {
 		test.log(LogStatus.INFO, "Closing browser");
-		// driver.quit();
+		//driver.quit();
 		return Constants.PASS;
 
 	}
