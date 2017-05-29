@@ -49,9 +49,9 @@ public class opportunity extends Base {
 		popupselectaccount("accountpopup_xpath");
 		selectlov("stage_xpath", 2);
 		Type("description_xpath", generaterandomname(7));
+		selectlov("Leadsource_xpath", 2);
 		Click("savebtn_xpath");
 		driver.close();
-
 	}
 
 	@AfterMethod
