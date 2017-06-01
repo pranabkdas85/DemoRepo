@@ -108,7 +108,7 @@ public class Base {
 			else if (locator_Key.endsWith("_name"))
 				we = driver.findElement(By.name(Prop.getProperty(locator_Key)));
 			else {
-				/* ReportFail("Locator is incorrect" + locator_Key); */
+				 ReportFail("Locator is incorrect" + locator_Key); 
 				Assert.fail("Locator is incorrect" + locator_Key);
 			}
 		} catch (Exception e) {
