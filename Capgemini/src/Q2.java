@@ -1,14 +1,11 @@
 import org.testng.Assert;
-import org.testng.AssertJUnit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,13 +17,7 @@ public class Q2 {
 	static WebDriver driver;
 	
 	public static void main(String[] args) {
-		//System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
-		/*System.setProperty("webdriver.gecko.driver", "D:/Coding/jars/geckodriver-v0.14.0-win32/geckodriver.exe");
-		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-		FirefoxOptions options = new FirefoxOptions();
-		options.setLogLevel(Level.SEVERE);
-		capabilities.setCapability("moz:firefoxOptions", options);
-		WebDriver driver = new FirefoxDriver(capabilities);*/
+		
 		
 		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();

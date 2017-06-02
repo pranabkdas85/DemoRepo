@@ -13,7 +13,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Q1 {
 	public static void main(String args[]) {
-		String browser = "Chrome";
+		String browser = "IE";
 		WebDriver driver = null;
 
 		if (browser.equals("Chrome")) {
@@ -30,6 +30,7 @@ public class Q1 {
 		}
 		else if(browser.equals("Mozilla")){
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+			System.setProperty("webdriver.gecko.driver","C:\\geckodriver.exe");
 			FirefoxOptions options = new FirefoxOptions();
 			options.setLogLevel(Level.SEVERE);
 			capabilities.setCapability("moz:firefoxOptions", options);

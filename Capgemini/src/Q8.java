@@ -1,9 +1,11 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,7 +13,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Q8 {
 
 	public static void main(String[] args) {
-		WebDriver driver = new FirefoxDriver();
+		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+		ChromeOptions options = new ChromeOptions();
+		Map<String, Object> chromePrefs = new HashMap<String, Object>();
+		chromePrefs.put("credentials_enable_service", false);
+		options.setExperimentalOption("prefs", chromePrefs);
+		options.addArguments("disable-infobars");
+		WebDriver driver = new ChromeDriver(options);
+
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
