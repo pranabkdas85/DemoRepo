@@ -32,7 +32,7 @@ public class Q3_5 {
 
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
-		//driver.findElement(By.xpath("//*[@id='app']/div/div[2]/div[2]/div[3]/div[3]/div")).click();
+		// driver.findElement(By.xpath("//*[@id='app']/div/div[2]/div[2]/div[3]/div[3]/div")).click();
 
 		// findout how many frames are there in the page
 		List<WebElement> frames = driver.findElements(By.tagName("iframe"));
