@@ -20,6 +20,7 @@ import java.util.logging.Level;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -32,6 +33,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -49,6 +51,7 @@ public class Base {
 	public String testCaseName;
 	public ExtentReports rep = ExtentManager.getInstance();
 	public ExtentTest test;
+	public JavascriptExecutor js;
 
 	public void init() {
 
@@ -108,7 +111,7 @@ public class Base {
 			else if (locator_Key.endsWith("_name"))
 				we = driver.findElement(By.name(Prop.getProperty(locator_Key)));
 			else {
-				 ReportFail("Locator is incorrect" + locator_Key); 
+				ReportFail("Locator is incorrect" + locator_Key);
 				Assert.fail("Locator is incorrect" + locator_Key);
 			}
 		} catch (Exception e) {
@@ -152,6 +155,18 @@ public class Base {
 		arl.toArray(str);
 		test.log(LogStatus.INFO, "The Actual List of values are :" + Arrays.toString(str));
 		return str;
+	}
+
+	public void waituntilpagecomplete() {
+		js = ((JavascriptExecutor) driver);
+		while (!(js.executeScript("return document.readyState").equals("complete"))) {
+			try {
+				Thread.sleep(5000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	public void closepopupwindows() {
