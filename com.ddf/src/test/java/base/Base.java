@@ -158,13 +158,19 @@ public class Base {
 	}
 
 	public void waituntilpagecomplete() {
+		long intialTime = System.currentTimeMillis();
+		long currentTime = intialTime;
+		//Max Wait time is given for 5 minutes ie, 300000 ms
+		long maxWaitTime = 5*60*1000;
 		js = ((JavascriptExecutor) driver);
-		while (!(js.executeScript("return document.readyState").equals("complete"))) {
+		
+		while (!(js.executeScript("return document.readyState").equals("complete")) && currentTime-intialTime<maxWaitTime) {
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			currentTime = System.currentTimeMillis();
 		}
 
 	}
