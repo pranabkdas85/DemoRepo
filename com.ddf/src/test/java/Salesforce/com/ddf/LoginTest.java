@@ -39,7 +39,7 @@ public class LoginTest extends Base {
 		if(checkiflogin().equals(data.get("ExpectedResult")))
 			ReportPass("User is able to Login Successfully");
 		else {
-			ReportFail("The actual and expected didnt match");
+			ReportFail("The actual And Expected didnt Match");
 		}
 
 		driver.close();
