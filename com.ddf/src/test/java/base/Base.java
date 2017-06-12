@@ -128,6 +128,7 @@ public class Base {
 	}
 
 	public void Click(String locator_Key) {
+		waituntilpagecomplete();
 		test.log(LogStatus.INFO, "clicking on" + locator_Key);
 		getelement(locator_Key).click();
 	}
@@ -160,11 +161,12 @@ public class Base {
 	public void waituntilpagecomplete() {
 		long intialTime = System.currentTimeMillis();
 		long currentTime = intialTime;
-		//Max Wait time is given for 5 minutes ie, 300000 ms
-		long maxWaitTime = 5*60*1000;
+		// Max Wait time is given for 5 minutes ie, 300000 ms
+		long maxWaitTime = 5 * 60 * 1000;
 		js = ((JavascriptExecutor) driver);
-		
-		while (!(js.executeScript("return document.readyState").equals("complete")) && currentTime-intialTime<maxWaitTime) {
+
+		while (!(js.executeScript("return document.readyState").equals("complete"))
+				&& currentTime - intialTime < maxWaitTime) {
 			try {
 				Thread.sleep(2000);
 			} catch (Exception e) {
@@ -220,10 +222,12 @@ public class Base {
 
 	// **********APP Functions*********************
 	public void userlogin(String userid, String password) {
+		waituntilpagecomplete();
 		test.log(LogStatus.INFO, "login by id: " + userid + " and password: " + password);
 		Type("Loginid_xpath", userid);
 		Type("password_xpath", password);
 		Click("Loginbutton_xpath");
+		waituntilpagecomplete();
 	}
 
 	public void popupselectaccount(String locator_key) {
@@ -239,6 +243,19 @@ public class Base {
 			Click(locator_key);
 		}
 		driver.switchTo().window(Mainwindows);
+	}
+
+	public String checkiflogin() {
+		String result=new String();
+		if (Iselementpresent("userlevel_xpath")) {
+			test.log(LogStatus.INFO, "Logged in Sucessfully");
+			result = "Y";
+
+		} else {
+			test.log(LogStatus.INFO, "Logged in Failed");
+			result = "N";
+		}
+		return result;
 	}
 
 	// *******************Validation Functions**********

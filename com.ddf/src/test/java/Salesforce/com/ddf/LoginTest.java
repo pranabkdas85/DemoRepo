@@ -36,20 +36,12 @@ public class LoginTest extends Base {
 		OpenBrowser(Prop.getProperty("browser"));
 		Navigate("appurl");
 		userlogin(data.get("UserName"), data.get("Password"));
-		String actual_Result = null;
-		if (Iselementpresent("userlevel_xpath")) {
-			test.log(LogStatus.INFO, "Logged in Sucessfully");
-			actual_Result = "Y";
+		if(checkiflogin().equals(data.get("ExpectedResult")))
+			ReportPass("User is able to Login Successfully");
+		else {
+			ReportFail("The actual and expected didnt match");
+		}
 
-		} else {
-			test.log(LogStatus.INFO, "Logged in Failed");
-			actual_Result = "N";
-		}
-		if (actual_Result.equals(data.get("ExpectedResult"))) {
-			ReportPass(" the Test Case is passed");
-		} else {
-			ReportFail("The test case is failed");
-		}
 		driver.close();
 	}
 
