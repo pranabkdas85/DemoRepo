@@ -22,10 +22,12 @@ public class Collections {
 		System.out.println(arraylist.size());
 		arraylist.add("Das");
 		System.out.println(arraylist.lastIndexOf("Kumar"));
+		
 
 		String[] Str = new String[arraylist.size()];
 		arraylist.toArray(Str);
 		System.out.println(Str[1]);
+		System.out.println(arraylist.toString());
 
 	}
 
