@@ -25,6 +25,9 @@ public class StringFunctions {
 		System.out.println(str.toLowerCase());
 		System.out.println(str.toUpperCase());
 		System.out.println(str.trim());
+		
+		
+		System.out.println(str.matches("prana"));
 
 	}
 
